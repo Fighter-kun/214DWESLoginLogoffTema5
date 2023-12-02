@@ -61,7 +61,7 @@
                         */
                         // Incluyo la librería de validación para comprobar los campos y el fichero de configuración de la BD
                         require_once '../core/231018libreriaValidacion.php';
-                        require_once "../config/confDB.php";
+                        require_once "../config/confDBPDO.php";
                         //declaracion de variables universales
                         define("OBLIGATORIO", 1);
                         define("OPCIONAL", 0);
