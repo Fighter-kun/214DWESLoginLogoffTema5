@@ -205,7 +205,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="submit" name="Login">Iniciar Sesión</button>
+                                    <div class="text-center">
+                                        <button type="submit" name="Login">Iniciar Sesión</button>
+                                    </div>
                                 </fieldset>
                             </form>
                             <?php
