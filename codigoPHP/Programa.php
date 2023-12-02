@@ -24,7 +24,7 @@
 
                         // Incluyo la librería de validación para comprobar los campos y el fichero de configuración de la BD
                         require_once '../core/231018libreriaValidacion.php';
-                        require_once "../config/confDB.php";
+                        require_once "../config/confDBPDO.php";
 
                         try {
                             $miDB = new PDO(DSN, USERNAME, PASSWORD); // Instanciamos un objeto PDO y establecemos la conexión
