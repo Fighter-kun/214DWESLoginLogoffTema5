@@ -43,7 +43,7 @@
 
     <body>
         <header class="text-center">
-            <h1>Proyecto LoginLogoffTema5:</h1>
+            <h1>Aplicación LoginLogoffTema5:</h1>
         </header>
         <main>
             <div class="container mt-3">
@@ -59,9 +59,12 @@
                         * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Login' 
                         * 
                         */
+                        
                         // Incluyo la librería de validación para comprobar los campos y el fichero de configuración de la BD
                         require_once '../core/231018libreriaValidacion.php';
                         require_once "../config/confDBPDO.php";
+                        // Incluyo un archivo que contiene funciones para redirigir a las páginas de la aplicación según la variable global '$_SERVER['SERVER_NAME']'
+                        require_once '../config/confApp.php';
                         //declaracion de variables universales
                         define("OBLIGATORIO", 1);
                         define("OPCIONAL", 0);
@@ -77,33 +80,24 @@
                             try {// validamos que el nombre de usuario 'user' sea correcto
                                 $miDB = new PDO(DSN, USERNAME, PASSWORD); // Instanciamos un objeto PDO y establecemos la conexión
 
-                                $sqlUsuario = "SELECT T01_Password FROM T01_Usuario WHERE T01_CodUsuario=:user";
+                                $sqlUsuario = 'SELECT * FROM T01_Usuario WHERE T01_CodUsuario="'.$_REQUEST['user'].'" AND T01_Password="'.hash("sha256", ($_REQUEST['user'] . $_REQUEST['password'])).'";';
                                 $consultaUsuario = $miDB->prepare($sqlUsuario); //Preparamos la consulta
-                                $parametrosUsuario = [":user" => $_REQUEST['user']];
 
-                                $consultaUsuario->execute($parametrosUsuario); // Pasamos los parámetros a la consulta
-                                $registro = $consultaUsuario->fetchObject();
-
-                                if ($consultaUsuario->rowCount() > 0) {// Si la consulta devuelve algun registro el codigo del usuario es correcto
-                                    $passwordEncriptado = hash("sha256", ($_REQUEST['user'] . $_REQUEST['password']));
-                                    if ($passwordEncriptado != $registro->T01_Password) {// Comprobamos que la contraseña sea correcta
-                                        $aErrores['user'] = "Error autentificación"; // Si la contraseña no es correcta guardamos un mensaje de error en el array de errores
-                                        $aErrores['password'] = "Error autentificación"; // Si la contraseña no es correcta guardamos un mensaje de error en el array de errores
-                                    }
-                                } else {//Si la consulta no devuelve ningun registro el codigo del usuario no es correcto
+                                $consultaUsuario->execute(); 
+                                $oUsuarioEnCurso = $consultaUsuario->fetchObject();
+                                
+                                if ($consultaUsuario->rowCount() <= 0) {
                                     $aErrores['user'] = "Error autentificación"; // Almacenamos un mensaje de error en el array de errores
                                     $aErrores['password'] = "Error autentificación"; // Almacenamos un mensaje de error en el array de errores
                                 }
+                                
                             } catch (PDOException $miExcepcionPDO) {
                                 $errorExcepcion = $miExcepcionPDO->getCode(); // Almacenamos el código del error de la excepción en la variable '$errorExcepcion'
                                 $mensajeExcepcion = $miExcepcionPDO->getMessage(); // Almacenamos el mensaje de la excepción en la variable '$mensajeExcepcion'
 
                                 echo "<span class='errorException'>Error: </span>" . $mensajeExcepcion . "<br>"; // Mostramos el mensaje de la excepción
                                 echo "<span class='errorException'>Código del error: </span>" . $errorExcepcion; // Mostramos el código de la excepción
-                            } finally {
-                                unset($miDB); // Cerramos la conexión con la base de datos
-                            }
-
+                            } 
                             // Recorremos el array de errores
                             foreach ($aErrores as $campo => $error) {
                                 if ($error != null) { // Comprobamos que el campo no esté vacio
@@ -116,31 +110,27 @@
                         }
                         if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rellenamos el array aFormulario con las respuestas introducidas por el usuario
                             try {// validamos que el nombre de usuario 'user' sea correcto
-                                $miDB = new PDO(DSN, USERNAME, PASSWORD); // Instanciamos un objeto PDO y establecemos la conexión
-
-                                $sql = "SELECT T01_NumConexiones, T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:user";
-                                $consulta = $miDB->prepare($sql); // Preparamos la consulta
-                                $parametros = [":user" => $_REQUEST['user']];
-
-                                $consulta->execute($parametros); // Ejecutamos la consulta
-                                $registro = $consulta->fetchObject(); // Obtenemos el primer registro de la consulta
-
-                                $nConexiones = $registro->T01_NumConexiones; // Almacenamos el numero de conexiones almacenado en la base de datos
-                                $fechaHoraUltimaConexion = $registro->T01_FechaHoraUltimaConexion; // Almacenamos la fecha hora de la ultima conexion almacenada en la base de datos
-
-                                settype($nConexiones, "integer"); // Convertimos en entero el numero de conexiones devuelto por la consulta
-
-                                $sqlUpdate = "UPDATE T01_Usuario SET T01_NumConexiones = :NumConexiones, T01_FechaHoraUltimaConexion=:FechaHoraUltimaConexion WHERE T01_CodUsuario=:user";
+                                // Se almacenan el numero de conexiones en $nConexiones
+                                $nConexiones = ($oUsuarioEnCurso->T01_NumConexiones)+1; 
+                                // Se almacenan la fecha y hora de la ultima conexion en un objeto datetime
+                                $oFechaHoraUltimaConexionAnterior = new DateTime($oUsuarioEnCurso->T01_FechaHoraUltimaConexion);
+                                
+                                session_start();// Iniciamos la sesión
+                                // Se almacena en una variable de sesión el codigo del usuario
+                                $_SESSION['user214DWESLoginLogoffTema5'] = $oUsuarioEnCurso->T01_CodUsuario; 
+                                // Se almacena en una variable de sesión el nombre completo del usuario
+                                $_SESSION['DescripcionUsuario'] = $oUsuarioEnCurso->T01_DescUsuario; 
+                                // Se almacena en una variable de sesión el numero de conexiones
+                                $_SESSION['NumeroConexiones'] = $nConexiones; 
+                                // Se almacena la fecha hora de la última conexión en una variable de sesión
+                                $_SESSION['FechaHoraUltimaConexionAnterior'] = $oFechaHoraUltimaConexionAnterior->format('Y-m-d H:i:s'); 
+                                redireccionarAPrograma(); // Llevo al usuario a la pagina 'Programa.php'
+                                
+                                $sqlUpdate = 'UPDATE T01_Usuario SET T01_NumConexiones ='.$nConexiones.', T01_FechaHoraUltimaConexion=now() WHERE T01_CodUsuario="'.$_REQUEST['user'].'";';
                                 $consultaUpdate = $miDB->prepare($sqlUpdate); // Preparamos la consulta
-                                $parametrosUpdate = [":NumConexiones" => ($nConexiones + 1),
-                                    ":FechaHoraUltimaConexion" => date('Y-m-d H:i:s', time()),
-                                    ":user" => $_REQUEST['user']];
-                                $consultaUpdate->execute($parametrosUpdate); // Pasamos los parámetros a la consulta
-
-                                session_start(); // Iniciamos la sesión
-                                $_SESSION['user214DWESLoginLogoffTema5'] = $_REQUEST['user']; // Almacenamos en una variable de sesión el codigo del usuario
-                                $_SESSION['FechaHoraUltimaConexionAnterior'] = $fechaHoraUltimaConexion; // Almacenamos la fecha hora de la última conexión en una variable de sesión
-                                header('Location: Programa.php'); // Llevo al usuario a la pagina 'Programa.php'
+                                $consultaUpdate->execute(); // Pasamos los parámetros a la consulta
+                                
+                                
                                 exit();
                             } catch (PDOException $miExcepcionPDO) {
                                 $errorExcepcion = $miExcepcionPDO->getCode(); // Almacenamos el código del error de la excepción en la variable '$errorExcepcion'
@@ -206,7 +196,7 @@
                                         </tbody>
                                     </table>
                                     <div class="text-center">
-                                        <button type="submit" name="Login">Iniciar Sesión</button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="Login">Iniciar Sesión</button>
                                     </div>
                                 </fieldset>
                             </form>
