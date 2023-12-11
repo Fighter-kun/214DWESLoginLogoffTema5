@@ -9,24 +9,22 @@
  * 
  */
 session_start(); //Reanudamos la sesion existente
-// Incluyo un archivo que contiene funciones para redirigir a las páginas de la aplicación según la variable global '$_SERVER['SERVER_NAME']'
-require_once '../config/confApp.php';
 
 if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se ha autentificado
-    redireccionarAIndex(); //Redirigimos a el usuario al index principal
+    header('Location: Login.php'); //Redirigimos a el usuario al login
     exit();
 }
 
 if (isset($_REQUEST['salir'])) { // Si el usuario hace click en el botón 'Salir' 
     session_destroy(); // Se destruye su sesión
-    redireccionarAIndex(); //Redirigimos a el usuario al index principal
+    header('Location: Login.php'); //Redirigimos a el usuario al login
     exit;
 }
 
 // Se valida si el usuario hace click en el botón 'Detalle' 
 if (isset($_REQUEST['detalle'])) {
     // Se redirige al usuario a Detalle
-    redireccionarADetalle();
+    header('Location: Detalle.php');;
     // Termina el programa
     exit();
 }

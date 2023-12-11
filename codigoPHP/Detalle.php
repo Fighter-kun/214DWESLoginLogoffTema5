@@ -9,12 +9,10 @@
  * 
  */
 session_start(); //Reanudamos la sesion existente
-// Incluyo un archivo que contiene funciones para redirigir a las páginas de la aplicación según la variable global '$_SERVER['SERVER_NAME']'
-require_once '../config/confApp.php';
 // Se valida si el usuario hace click en el botón 'Detalle' 
 if (isset($_REQUEST['atras'])) {
     // Se redirige al usuario al Login
-    redireccionarAPrograma(); // Llevo al usuario a la pagina 'Programa.php'
+    header('Location: Programa.php'); // Llevo al usuario a la pagina 'Programa.php'
     // Termina el programa
     exit();
 }
