@@ -24,7 +24,7 @@ if (isset($_REQUEST['cerrarSesion'])) { // Si el usuario hace click en el botón
 // Se valida si el usuario hace click en el botón 'Detalle' 
 if (isset($_REQUEST['detalle'])) {
     // Se redirige al usuario a Detalle
-    header('Location: Detalle.php');;
+    header('Location: Detalle.php');
     // Termina el programa
     exit();
 }
@@ -49,9 +49,26 @@ if (isset($_REQUEST['detalle'])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="../webroot/css/style.css">
+        <script type="text/javascript" src="../webroot/javascript/reloj.js"></script>
+        <style>
+            /* RELOJ */
+            #date {
+                letter-spacing:10px;
+                font-size:20px;
+                font-family:'helvetica';
+                color:#D4AF37;
+            }
+
+            .digit {
+                width: 50px;
+                height: 100px;
+                display: inline-block;
+                background-size: cover;
+            }
+        </style>
     </head>
 
-    <body>
+    <body onload="startTime()"><!-- Uso de la función JS 'startTime()' para iniciar el reloj -->
         <header class="text-center">
             <h1>Aplicación LoginLogoffTema5:</h1>
         </header>
@@ -77,21 +94,30 @@ if (isset($_REQUEST['detalle'])) {
                          */
                         if ($_COOKIE['idioma'] == 'UK') {
                             if ($_SESSION['NumeroConexiones'] == 1) {
-                            echo("<div>Welcome ".$_SESSION['DescripcionUsuario']." this is the ".$_SESSION['NumeroConexiones']." time you connect;</div>");
-                        } else {
-                            echo("<div>Welcome ".$_SESSION['DescripcionUsuario']." this is the ".$_SESSION['NumeroConexiones']." time you connect; "
-                                . "you last logged in on ".$_SESSION['FechaHoraUltimaConexionAnterior']."</div>");
-                        }
+                                echo("<div>Welcome " . $_SESSION['DescripcionUsuario'] . " this is the " . $_SESSION['NumeroConexiones'] . " time you connect;</div>");
+                            } else {
+                                echo("<div>Welcome " . $_SESSION['DescripcionUsuario'] . " this is the " . $_SESSION['NumeroConexiones'] . " time you connect; "
+                                . "you last logged in on " . $_SESSION['FechaHoraUltimaConexionAnterior'] . "</div>");
+                            }
                         }
                         if ($_COOKIE['idioma'] == 'SP') {
                             if ($_SESSION['NumeroConexiones'] == 1) {
-                            echo("<div>Bienvenido ".$_SESSION['DescripcionUsuario']." esta es la ".$_SESSION['NumeroConexiones']." vez que te conectas;</div>");
-                        } else {
-                            echo("<div>Bienvenido ".$_SESSION['DescripcionUsuario']." esta es la ".$_SESSION['NumeroConexiones']." vez que te conectas; "
-                                . "usted se conectó por última vez el ".$_SESSION['FechaHoraUltimaConexionAnterior']."</div>");
-                        }
+                                echo("<div>Bienvenido " . $_SESSION['DescripcionUsuario'] . " esta es la " . $_SESSION['NumeroConexiones'] . " vez que te conectas;</div>");
+                            } else {
+                                echo("<div>Bienvenido " . $_SESSION['DescripcionUsuario'] . " esta es la " . $_SESSION['NumeroConexiones'] . " vez que te conectas; "
+                                . "usted se conectó por última vez el " . $_SESSION['FechaHoraUltimaConexionAnterior'] . "</div>");
+                            }
                         }
                         ?> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col mt-5">
+                        <div id="clockdate">
+                            <div id="clock"></div>
+                            <div id="date"></div>
+                        </div>
                     </div>
                 </div>
             </div>

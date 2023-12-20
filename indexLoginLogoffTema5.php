@@ -8,6 +8,10 @@
  * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Index' 
  * 
  */
+if (!isset($_COOKIE['idioma'])) {
+    setcookie("idioma", "SP", time() + 2592000); // Ponemos el valor por defecto en la cookie
+}
+
 if (isset($_REQUEST['botonIdioma'])) {
     setcookie("idioma", $_REQUEST['botonIdioma'], time() + 2592000); // Ponemos que el idioma sea el seleccionado en el boton y aplico una caducidad de 1 mes
     header('Location: indexLoginLogoffTema5.php'); //Redirigimos a el usuario al login
