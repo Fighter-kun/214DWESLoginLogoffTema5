@@ -20,6 +20,7 @@ if (isset($_REQUEST['atras'])) {
     // Termina el programa
     exit();
 }
+require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
 ?>
 <!DOCTYPE html>
 <!--
@@ -45,14 +46,14 @@ if (isset($_REQUEST['atras'])) {
 
     <body>
         <header class="text-center">
-            <h1>Aplicación LoginLogoffTema5:</h1>
+            <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5:</h1>
         </header>
         <main>
             <div class="container mt-3">
                 <div class="row d-flex justify-content-start">
                     <div class="col">
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="atras">Atras</button>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="atras"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonAtras']?></button>
                         </form>        
                     </div>
                     <div class="col">
@@ -153,7 +154,7 @@ if (isset($_REQUEST['atras'])) {
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"> Inicio</a>
+                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img

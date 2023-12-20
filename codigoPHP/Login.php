@@ -16,19 +16,20 @@ if (isset($_REQUEST['cancelar'])) {
 // Incluyo la librería de validación para comprobar los campos y el fichero de configuración de la BD
 require_once '../core/231018libreriaValidacion.php';
 require_once "../config/confDBPDO.php";
-//declaracion de variables universales
+require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
+// Declaracion de variables universales
 define("OBLIGATORIO", 1);
 define("OPCIONAL", 0);
 $entradaOK = true;
 
 // Declaramos el array de errores y lo inicializamos a null
-$aErrores = ['user' => null,
-    'password' => null];
+$aErrores = ['user' => null];
+$aErrores = ['password' => null];
 
 if (isset($_REQUEST['Login'])) { // Comprobamos que el usuario haya enviado el formulario
     $aErrores['user'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['user'], 15, 3, OBLIGATORIO);
     $aErrores['password'] = validacionFormularios::validarpassword($_REQUEST['password'], 8, 3, 1, OBLIGATORIO);
-    try {// validamos que el nombre de usuario 'user' sea correcto
+    try {// Validamos que el nombre de usuario 'user' sea correcto
         $miDB = new PDO(DSN, USERNAME, PASSWORD); // Instanciamos un objeto PDO y establecemos la conexión
 
         $sqlUsuario = 'SELECT * FROM T01_Usuario WHERE T01_CodUsuario="' . $_REQUEST['user'] . '" AND T01_Password="' . hash("sha256", ($_REQUEST['user'] . $_REQUEST['password'])) . '";';
@@ -140,7 +141,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
 
         <body>
             <header class="text-center">
-                <h1>Aplicación LoginLogoffTema5:</h1>
+                <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5:</h1>
             </header>
             <main>
                 <div class="container mt-3">
@@ -152,14 +153,14 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th class="rounded-top" colspan="3"><legend>Iniciar Sesión</legend></th>
+                                                <th class="rounded-top" colspan="3"><legend><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['tituloLogin']?></legend></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <!-- CodDepartamento Obligatorio -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="user">Introduce usuario:</label>
+                                                    <label for="user"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['usuarioLogin']?>:</label>
                                                 </td>
                                                 <td>
                                                     <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
@@ -179,7 +180,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                             <tr>
                                                 <!-- CodDepartamento Obligatorio -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="password">Introduce contraseña:</label>
+                                                    <label for="password"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['contraseñaLogin']?>:</label>
                                                 </td>
                                                 <td>
                                                     <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
@@ -199,8 +200,8 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                         </tbody>
                                     </table>
                                     <div class="text-center">
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="Login">Iniciar Sesión</button>
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar">Cancelar</button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="Login"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['tituloLogin']?></button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCancelar']?></button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -219,7 +220,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                     IES LOS SAUCES 2023-24 </address>
             </div>
             <div class="footer-item">
-                <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"> Inicio</a>
+                <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
             </div>
             <div class="footer-item">
                 <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img

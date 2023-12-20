@@ -17,7 +17,7 @@ if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se h
 
 if (isset($_REQUEST['cerrarSesion'])) { // Si el usuario hace click en el botón 'Salir' 
     session_destroy(); // Se destruye su sesión
-    header('Location: Login.php'); //Redirigimos a el usuario al login
+    header('Location: ../indexLoginLogoffTema5.php'); //Redirigimos a el usuario al login
     exit;
 }
 
@@ -28,6 +28,7 @@ if (isset($_REQUEST['detalle'])) {
     // Termina el programa
     exit();
 }
+require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
 ?>
 <!DOCTYPE html>
 <!--
@@ -70,15 +71,15 @@ if (isset($_REQUEST['detalle'])) {
 
     <body onload="startTime()"><!-- Uso de la función JS 'startTime()' para iniciar el reloj -->
         <header class="text-center">
-            <h1>Aplicación LoginLogoffTema5:</h1>
+            <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5:</h1>
         </header>
         <main>
             <div class="container mt-3">
                 <div class="row d-flex justify-content-start">
-                    <div class="col">
+                    <div class="col"><!-- Formulario donde recogemos los botones para ir a detalle o cerrar sesión -->
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cerrarSesion">Cerrar Sesión</button><br><br>
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle">Detalle</button>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cerrarSesion"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCerrarSesion']?></button><br><br>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonDetalle']?></button>
                         </form>        
                     </div>
                     <div class="col">
@@ -92,21 +93,16 @@ if (isset($_REQUEST['detalle'])) {
                          * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Programa' 
                          * 
                          */
-                        if ($_COOKIE['idioma'] == 'UK') {
-                            if ($_SESSION['NumeroConexiones'] == 1) {
-                                echo("<div>Welcome " . $_SESSION['DescripcionUsuario'] . " this is the " . $_SESSION['NumeroConexiones'] . " time you connect;</div>");
-                            } else {
-                                echo("<div>Welcome " . $_SESSION['DescripcionUsuario'] . " this is the " . $_SESSION['NumeroConexiones'] . " time you connect; "
-                                . "you last logged in on " . $_SESSION['FechaHoraUltimaConexionAnterior'] . "</div>");
-                            }
-                        }
-                        if ($_COOKIE['idioma'] == 'SP') {
-                            if ($_SESSION['NumeroConexiones'] == 1) {
-                                echo("<div>Bienvenido " . $_SESSION['DescripcionUsuario'] . " esta es la " . $_SESSION['NumeroConexiones'] . " vez que te conectas;</div>");
-                            } else {
-                                echo("<div>Bienvenido " . $_SESSION['DescripcionUsuario'] . " esta es la " . $_SESSION['NumeroConexiones'] . " vez que te conectas; "
-                                . "usted se conectó por última vez el " . $_SESSION['FechaHoraUltimaConexionAnterior'] . "</div>");
-                            }
+                        if ($_SESSION['NumeroConexiones'] == 1) { // Compruebo si es la primera vez que se conecta y omito la fecha y hora de última conexión
+                            echo("<div>".$aIdiomaSeleccionado[$_COOKIE['idioma']]['bienvenido']." ". $_SESSION['DescripcionUsuario']." ". 
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['estaEsLa']." ". $_SESSION['NumeroConexiones'] ." ".
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['vezQueTeConectas'].";</div>");
+                        } else {
+                            // Si se a conectado más veces muestro toda la información
+                            echo("<div>".$aIdiomaSeleccionado[$_COOKIE['idioma']]['bienvenido']." ". $_SESSION['DescripcionUsuario']." ". 
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['estaEsLa']." ". $_SESSION['NumeroConexiones'] ." ".
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['vezQueTeConectas']."; "." ".
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['ultimaConexion'] ." " . $_SESSION['FechaHoraUltimaConexionAnterior'] . "</div>");
                         }
                         ?> 
                     </div>
@@ -114,7 +110,7 @@ if (isset($_REQUEST['detalle'])) {
                 <div class="row">
                     <div class="col"></div>
                     <div class="col mt-5">
-                        <div id="clockdate">
+                        <div id="clockdate"><!-- Bloque de código HTML donde va el reloj -->
                             <div id="clock"></div>
                             <div id="date"></div>
                         </div>
@@ -129,7 +125,7 @@ if (isset($_REQUEST['detalle'])) {
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"> Inicio</a>
+                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img

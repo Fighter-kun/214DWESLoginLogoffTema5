@@ -8,15 +8,16 @@
  * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Index' 
  * 
  */
-if (!isset($_COOKIE['idioma'])) {
-    setcookie("idioma", "SP", time() + 2592000); // Ponemos el valor por defecto en la cookie
+if (!isset($_COOKIE['idioma'])) { // Comprobamos si la cookie esta declarada
+    setcookie("idioma", "SP", time() + 2592000); // En caso negativo la creamos y ponemos el valor por defecto
 }
 
-if (isset($_REQUEST['botonIdioma'])) {
-    setcookie("idioma", $_REQUEST['botonIdioma'], time() + 2592000); // Ponemos que el idioma sea el seleccionado en el boton y aplico una caducidad de 1 mes
-    header('Location: indexLoginLogoffTema5.php'); //Redirigimos a el usuario al login
+if (isset($_REQUEST['botonIdioma'])) { // Comprobamos si el usuario a pulsado algún botón de idioma
+    setcookie("idioma", $_REQUEST['botonIdioma'], time() + 2592000); // En caso afirmativo creamos la cookie y la cargamos con el valor seleccionado y ponemos una fecha de caducidad de 1 mes
+    header('Location: indexLoginLogoffTema5.php'); // Recrgamos la página con el nuevo idioma
     exit();
 }
+require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
 ?>
 <!DOCTYPE html>
 <!--
@@ -47,7 +48,7 @@ if (isset($_REQUEST['botonIdioma'])) {
 
     <body>
         <header class="text-center">
-            <h1>Aplicación LoginLogoffTema5</h1>
+            <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5</h1>
         </header>
         <main>
             <div class="container mt-3">
@@ -55,6 +56,7 @@ if (isset($_REQUEST['botonIdioma'])) {
                     <div class="col text-center">
                         <form class="opcionesDelIdioma">
                             <button type="submit" value="UK" name="botonIdioma"><img src="doc/icono_UK.png" class="img-fluid" alt="Bandera_UK"></button>
+                            <button type="submit" value="JP" name="botonIdioma"><img src="doc/icono_JP.png" class="img-fluid" alt="Bandera_JP"></button>
                             <button type="submit" value="SP" name="botonIdioma"><img src="doc/icono_SP.png" class="img-fluid" alt="Bandera_SP"></button>
                         </form>
                     </div>
@@ -78,7 +80,7 @@ if (isset($_REQUEST['botonIdioma'])) {
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../214DWESProyectoDWES/indexProyectoDWES.html" style="color: white; text-decoration: none;"> Inicio</a>
+                    <a href="../214DWESProyectoDWES/indexProyectoDWES.html" style="color: white; text-decoration: none;"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img
