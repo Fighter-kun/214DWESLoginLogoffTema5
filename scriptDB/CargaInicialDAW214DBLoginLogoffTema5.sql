@@ -22,5 +22,5 @@ INSERT INTO T01_Usuario (T01_CodUsuario, T01_Password, T01_DescUsuario, T01_Perf
     ('rebeca', SHA2('rebecapaso', 256), 'Rebeca Sánchez Pérez', 'usuario'),
     ('erika', SHA2('erikapaso', 256), 'Erika Martínez Pérez', 'usuario'),
     ('ismael', SHA2('ismaelpaso', 256), 'Ismael Ferreras García', 'usuario'),
-    ('heraclio', SHA2('heracliopaso', 256), 'Heraclio Borbujo Moran', 'administrador'),
-    ('amor', SHA2('amorpaso', 256), 'Amor Rodriguez Navarro', 'administrador');
+    ('heraclio', SHA2('heracliopaso', 256), 'Heraclio Borbujo Moran', 'usuario'),
+    ('amor', SHA2('amorpaso', 256), 'Amor Rodriguez Navarro', 'usuario');

@@ -15,7 +15,7 @@ if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se h
     exit();
 }
 
-if (isset($_REQUEST['salir'])) { // Si el usuario hace click en el botón 'Salir' 
+if (isset($_REQUEST['cerrarSesion'])) { // Si el usuario hace click en el botón 'Salir' 
     session_destroy(); // Se destruye su sesión
     header('Location: Login.php'); //Redirigimos a el usuario al login
     exit;
@@ -60,7 +60,7 @@ if (isset($_REQUEST['detalle'])) {
                 <div class="row d-flex justify-content-start">
                     <div class="col">
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="salir">Cerrar Sesión</button><br><br>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cerrarSesion">Cerrar Sesión</button><br><br>
                             <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle">Detalle</button>
                         </form>        
                     </div>
@@ -75,8 +75,22 @@ if (isset($_REQUEST['detalle'])) {
                          * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Programa' 
                          * 
                          */
-                        echo("<div>Bienvenido ".$_SESSION['DescripcionUsuario']." esta es la ".$_SESSION['NumeroConexiones']." vez que te conectas; "
+                        if ($_COOKIE['idioma'] == 'UK') {
+                            if ($_SESSION['NumeroConexiones'] == 1) {
+                            echo("<div>Welcome ".$_SESSION['DescripcionUsuario']." this is the ".$_SESSION['NumeroConexiones']." time you connect;</div>");
+                        } else {
+                            echo("<div>Welcome ".$_SESSION['DescripcionUsuario']." this is the ".$_SESSION['NumeroConexiones']." time you connect; "
+                                . "you last logged in on ".$_SESSION['FechaHoraUltimaConexionAnterior']."</div>");
+                        }
+                        }
+                        if ($_COOKIE['idioma'] == 'SP') {
+                            if ($_SESSION['NumeroConexiones'] == 1) {
+                            echo("<div>Bienvenido ".$_SESSION['DescripcionUsuario']." esta es la ".$_SESSION['NumeroConexiones']." vez que te conectas;</div>");
+                        } else {
+                            echo("<div>Bienvenido ".$_SESSION['DescripcionUsuario']." esta es la ".$_SESSION['NumeroConexiones']." vez que te conectas; "
                                 . "usted se conectó por última vez el ".$_SESSION['FechaHoraUltimaConexionAnterior']."</div>");
+                        }
+                        }
                         ?> 
                     </div>
                 </div>

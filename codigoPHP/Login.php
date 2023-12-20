@@ -1,13 +1,18 @@
 <?php
 /**
  * @author Carlos García Cachón
- * @version 1.0
- * @since 28/11/2023
+ * @version 1.2
+ * @since 13/12/2023
  * @copyright Todos los derechos reservados a Carlos García
  * 
  * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Login' 
  * 
  */
+// Estructura del boton cancelar, si el ususario pulsa el botón
+if (isset($_REQUEST['cancelar'])) {
+    header('Location: ../indexLoginLogoffTema5.php'); // Llevo al usuario a la pagina 'index.LoginLogoffTema5.html'
+    exit();
+}
 // Incluyo la librería de validación para comprobar los campos y el fichero de configuración de la BD
 require_once '../core/231018libreriaValidacion.php';
 require_once "../config/confDBPDO.php";
@@ -66,11 +71,13 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
         $_SESSION['user214DWESLoginLogoffTema5'] = $oUsuarioEnCurso->T01_CodUsuario;
         // Se almacena en una variable de sesión el nombre completo del usuario
         $_SESSION['DescripcionUsuario'] = $oUsuarioEnCurso->T01_DescUsuario;
+        // Se almacena la fecha hora de la última conexión en una variable de sesión
+        if ($nConexiones > 1) {
+            $_SESSION['FechaHoraUltimaConexionAnterior'] = $oFechaHoraUltimaConexionAnterior->format('Y-m-d H:i:s');
+        }
         // Se almacena en una variable de sesión el numero de conexiones
         $_SESSION['NumeroConexiones'] = $nConexiones;
-        // Se almacena la fecha hora de la última conexión en una variable de sesión
-        $_SESSION['FechaHoraUltimaConexionAnterior'] = $oFechaHoraUltimaConexionAnterior->format('Y-m-d H:i:s');
-
+        
         $sqlUpdate = 'UPDATE T01_Usuario SET T01_NumConexiones =' . $nConexiones . ', T01_FechaHoraUltimaConexion=now() WHERE T01_CodUsuario="' . $_REQUEST['user'] . '";';
         $consultaUpdate = $miDB->prepare($sqlUpdate); // Preparamos la consulta
         $consultaUpdate->execute(); // Pasamos los parámetros a la consulta
@@ -193,6 +200,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                     </table>
                                     <div class="text-center">
                                         <button class="btn btn-secondary" aria-disabled="true" type="submit" name="Login">Iniciar Sesión</button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar">Cancelar</button>
                                     </div>
                                 </fieldset>
                             </form>

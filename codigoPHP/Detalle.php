@@ -9,6 +9,10 @@
  * 
  */
 session_start(); //Reanudamos la sesion existente
+if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se ha autentificado
+    header('Location: Login.php'); //Redirigimos a el usuario al login
+    exit();
+}
 // Se valida si el usuario hace click en el botón 'Detalle' 
 if (isset($_REQUEST['atras'])) {
     // Se redirige al usuario al Login

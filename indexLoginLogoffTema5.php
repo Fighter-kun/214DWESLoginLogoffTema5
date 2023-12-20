@@ -1,3 +1,19 @@
+<?php
+/**
+ * @author Carlos García Cachón
+ * @version 1.2
+ * @since 13/12/2023
+ * @copyright Todos los derechos reservados a Carlos García
+ * 
+ * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Index' 
+ * 
+ */
+if (isset($_REQUEST['botonIdioma'])) {
+    setcookie("idioma", $_REQUEST['botonIdioma'], time() + 2592000); // Ponemos que el idioma sea el seleccionado en el boton y aplico una caducidad de 1 mes
+    header('Location: indexLoginLogoffTema5.php'); //Redirigimos a el usuario al login
+    exit();
+}
+?>
 <!DOCTYPE html>
 <!--
         Descripción: 214DWESLoginLogoffTema5
@@ -18,6 +34,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="webroot/css/style.css">
+        <style>
+            button {
+                all: unset;
+            }
+        </style>
     </head>
 
     <body>
@@ -26,6 +47,14 @@
         </header>
         <main>
             <div class="container mt-3">
+                <div class="row mb-5">
+                    <div class="col text-center">
+                        <form class="opcionesDelIdioma">
+                            <button type="submit" value="UK" name="botonIdioma"><img src="doc/icono_UK.png" class="img-fluid" alt="Bandera_UK"></button>
+                            <button type="submit" value="SP" name="botonIdioma"><img src="doc/icono_SP.png" class="img-fluid" alt="Bandera_SP"></button>
+                        </form>
+                    </div>
+                </div>
                 <div class="row mb-5">
                     <div class="col text-center">
                         <img src="doc/appLoginLogoff.png" class="img-fluid" alt="Mapeo de la Aplicación">
