@@ -154,7 +154,7 @@ require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensa
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
+                    <a href="../indexLoginLogoffTema5.php" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img

@@ -1,5 +1,5 @@
 Options -Indexes
-DirectoryIndex indexLoginLogoffTema5 index.php index.html
+DirectoryIndex indexLoginLogoffTema5.php index.php index.html
 ErrorDocument 403 /214DWESLoginLogoffTema5/errors/403.html
 ErrorDocument 404 /214DWESLoginLogoffTema5/errors/404.html
 Redirect 301 /google https://www.google.es

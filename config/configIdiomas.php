@@ -19,7 +19,9 @@ $aIdiomaSeleccionado = [
         'estaEsLa' => 'esta es la',
         'vezQueTeConectas' => 'vez que te conectas',
         'ultimaConexion' => 'usted se conectó por última vez el',
-        'botonAtras' => 'Atras'
+        'botonAtras' => 'Atras',
+        'registrarse' => 'Registrarse',
+        'registro' => 'Registro'
     ],
     'UK' => [
         'titulo' => 'App',

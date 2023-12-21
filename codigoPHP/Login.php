@@ -10,7 +10,13 @@
  */
 // Estructura del boton cancelar, si el ususario pulsa el botón
 if (isset($_REQUEST['cancelar'])) {
-    header('Location: ../indexLoginLogoffTema5.php'); // Llevo al usuario a la pagina 'index.LoginLogoffTema5.html'
+    header('Location: ../indexLoginLogoffTema5.php'); // Llevo al usuario a la pagina 'index.LoginLogoffTema5.php'
+    exit();
+}
+
+// Estructura del boton registrarse, si el ususario pulsa el botón
+if (isset($_REQUEST['registrarse'])) {
+    header('Location: Registro.php'); // Llevo al usuario a la pagina 'Registro.php'
     exit();
 }
 // Incluyo la librería de validación para comprobar los campos y el fichero de configuración de la BD
@@ -201,6 +207,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                     </table>
                                     <div class="text-center">
                                         <button class="btn btn-secondary" aria-disabled="true" type="submit" name="Login"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['tituloLogin']?></button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="registrarse"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['resgistrarse']?></button>
                                         <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCancelar']?></button>
                                     </div>
                                 </fieldset>
@@ -220,7 +227,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                     IES LOS SAUCES 2023-24 </address>
             </div>
             <div class="footer-item">
-                <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
+                <a href="../indexLoginLogoffTema5.php" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
             </div>
             <div class="footer-item">
                 <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img
