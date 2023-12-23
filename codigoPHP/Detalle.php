@@ -10,13 +10,13 @@
  */
 session_start(); //Reanudamos la sesion existente
 if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se ha autentificado
-    header('Location: Login.php'); //Redirigimos a el usuario al login
+    header('Location: login.php'); //Redirigimos a el usuario al login
     exit();
 }
-// Se valida si el usuario hace click en el botón 'Detalle' 
+// Se valida si el usuario hace click en el botón 'detalle' 
 if (isset($_REQUEST['atras'])) {
-    // Se redirige al usuario al Login
-    header('Location: Programa.php'); // Llevo al usuario a la pagina 'Programa.php'
+    // Se redirige al usuario al login
+    header('Location: programa.php'); // Llevo al usuario a la pagina 'programa.php'
     // Termina el programa
     exit();
 }
@@ -63,7 +63,7 @@ require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensa
                         * @version 1.1
                         * @since 05/11/2023
                         *
-                        * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Detalle' 
+                        * @Annotation Proyecto LoginLogoffTema5 - Parte de 'detalle' 
                         * 
                         */
                         // $_SESSION

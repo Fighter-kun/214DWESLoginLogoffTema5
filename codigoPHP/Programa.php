@@ -11,7 +11,7 @@
 session_start(); //Reanudamos la sesion existente
 
 if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se ha autentificado
-    header('Location: Login.php'); //Redirigimos a el usuario al login
+    header('Location: login.php'); //Redirigimos a el usuario al login
     exit();
 }
 
@@ -24,7 +24,15 @@ if (isset($_REQUEST['cerrarSesion'])) { // Si el usuario hace click en el botón
 // Se valida si el usuario hace click en el botón 'Detalle' 
 if (isset($_REQUEST['detalle'])) {
     // Se redirige al usuario a Detalle
-    header('Location: Detalle.php');
+    header('Location: detalle.php');
+    // Termina el programa
+    exit();
+}
+
+// Se valida si el usuario hace click en el botón 'Editar Perfil' 
+if (isset($_REQUEST['editarPerfil'])) {
+    // Se redirige al usuario a editarPerfil
+    header('Location: editarPerfil.php');
     // Termina el programa
     exit();
 }
@@ -79,7 +87,8 @@ require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensa
                     <div class="col"><!-- Formulario donde recogemos los botones para ir a detalle o cerrar sesión -->
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                             <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cerrarSesion"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCerrarSesion']?></button><br><br>
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonDetalle']?></button>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonDetalle']?></button><br><br>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="editarPerfil">Editar Perfil</button>
                         </form>        
                     </div>
                     <div class="col">

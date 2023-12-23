@@ -63,12 +63,12 @@ require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensaj
                 </div>
                 <div class="row mb-5">
                     <div class="col text-center">
-                        <img src="doc/appLoginLogoff.png" class="img-fluid" alt="Mapeo de la Aplicación">
+                        <img src="doc/esquemaApp.jpg" class="img-fluid" alt="Mapeo de la Aplicación">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <a class="btn btn-secondary" role="button" aria-disabled="true" href='codigoPHP/Login.php'>LOGIN</a>
+                        <a class="btn btn-secondary" role="button" aria-disabled="true" href='codigoPHP/login.php'>LOGIN</a>
                     </div>
                 </div>
             </div>
