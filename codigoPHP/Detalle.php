@@ -9,13 +9,18 @@
  * 
  */
 session_start(); //Reanudamos la sesion existente
-// Se valida si el usuario hace click en el botón 'Detalle' 
+if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se ha autentificado
+    header('Location: login.php'); //Redirigimos a el usuario al login
+    exit();
+}
+// Se valida si el usuario hace click en el botón 'detalle' 
 if (isset($_REQUEST['atras'])) {
-    // Se redirige al usuario al Login
-    header('Location: Programa.php'); // Llevo al usuario a la pagina 'Programa.php'
+    // Se redirige al usuario al login
+    header('Location: programa.php'); // Llevo al usuario a la pagina 'programa.php'
     // Termina el programa
     exit();
 }
+require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
 ?>
 <!DOCTYPE html>
 <!--
@@ -41,14 +46,14 @@ if (isset($_REQUEST['atras'])) {
 
     <body>
         <header class="text-center">
-            <h1>Aplicación LoginLogoffTema5:</h1>
+            <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5:</h1>
         </header>
         <main>
             <div class="container mt-3">
                 <div class="row d-flex justify-content-start">
                     <div class="col">
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="atras">Atras</button>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="atras"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonAtras']?></button>
                         </form>        
                     </div>
                     <div class="col">
@@ -58,7 +63,7 @@ if (isset($_REQUEST['atras'])) {
                         * @version 1.1
                         * @since 05/11/2023
                         *
-                        * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Detalle' 
+                        * @Annotation Proyecto LoginLogoffTema5 - Parte de 'detalle' 
                         * 
                         */
                         // $_SESSION
@@ -149,7 +154,7 @@ if (isset($_REQUEST['atras'])) {
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"> Inicio</a>
+                    <a href="../indexLoginLogoffTema5.php" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img

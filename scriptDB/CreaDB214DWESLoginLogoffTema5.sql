@@ -20,7 +20,7 @@ CREATE TABLE T01_Usuario (
     T01_Password VARCHAR(64),
     T01_DescUsuario VARCHAR(255),
     T01_NumConexiones INT DEFAULT 0,
-    T01_FechaHoraUltimaConexion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    T01_FechaHoraUltimaConexion DATETIME DEFAULT NULL,
     T01_Perfil ENUM('usuario','administrador') DEFAULT 'usuario',
     T01_ImagenUsuario BLOB
 )ENGINE=INNODB;

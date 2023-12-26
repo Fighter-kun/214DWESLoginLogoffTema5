@@ -17,7 +17,7 @@ Proyecto LoginLogoff - DWES Tema 5
 ## Funcionalidades
 
 ## Entorno de Desarrollo
-   - [Entorno de Desarrollo](http://daw214.isauces.local/214DWESLoginLogoffTema5/indexLoginLogoffTema5.html)
+   - [Entorno de Desarrollo](http://daw214.isauces.local/214DWESLoginLogoffTema5/indexLoginLogoffTema5.php)
 
 ## Entorno de Explotación
-   - [Entorno de Explotación](https://daw214.ieslossauces.es/214DWESLoginLogoffTema5/indexLoginLogoffTema5.html)
+   - [Entorno de Explotación](https://daw214.ieslossauces.es/214DWESLoginLogoffTema5/indexLoginLogoffTema5.php)

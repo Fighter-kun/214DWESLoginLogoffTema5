@@ -11,23 +11,32 @@
 session_start(); //Reanudamos la sesion existente
 
 if (!isset($_SESSION['user214DWESLoginLogoffTema5'])) { // Si el usuario no se ha autentificado
-    header('Location: Login.php'); //Redirigimos a el usuario al login
+    header('Location: login.php'); //Redirigimos a el usuario al login
     exit();
 }
 
-if (isset($_REQUEST['salir'])) { // Si el usuario hace click en el botón 'Salir' 
+if (isset($_REQUEST['cerrarSesion'])) { // Si el usuario hace click en el botón 'Salir' 
     session_destroy(); // Se destruye su sesión
-    header('Location: Login.php'); //Redirigimos a el usuario al login
+    header('Location: ../indexLoginLogoffTema5.php'); //Redirigimos a el usuario al login
     exit;
 }
 
 // Se valida si el usuario hace click en el botón 'Detalle' 
 if (isset($_REQUEST['detalle'])) {
     // Se redirige al usuario a Detalle
-    header('Location: Detalle.php');;
+    header('Location: detalle.php');
     // Termina el programa
     exit();
 }
+
+// Se valida si el usuario hace click en el botón 'Editar Perfil' 
+if (isset($_REQUEST['editarPerfil'])) {
+    // Se redirige al usuario a editarPerfil
+    header('Location: editarPerfil.php');
+    // Termina el programa
+    exit();
+}
+require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
 ?>
 <!DOCTYPE html>
 <!--
@@ -49,19 +58,37 @@ if (isset($_REQUEST['detalle'])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="../webroot/css/style.css">
+        <script type="text/javascript" src="../webroot/javascript/reloj.js"></script>
+        <style>
+            /* RELOJ */
+            #date {
+                letter-spacing:10px;
+                font-size:20px;
+                font-family:'helvetica';
+                color:#D4AF37;
+            }
+
+            .digit {
+                width: 50px;
+                height: 100px;
+                display: inline-block;
+                background-size: cover;
+            }
+        </style>
     </head>
 
-    <body>
+    <body onload="startTime()"><!-- Uso de la función JS 'startTime()' para iniciar el reloj -->
         <header class="text-center">
-            <h1>Aplicación LoginLogoffTema5:</h1>
+            <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5:</h1>
         </header>
         <main>
             <div class="container mt-3">
                 <div class="row d-flex justify-content-start">
-                    <div class="col">
+                    <div class="col"><!-- Formulario donde recogemos los botones para ir a detalle o cerrar sesión -->
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="salir">Cerrar Sesión</button><br><br>
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle">Detalle</button>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cerrarSesion"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCerrarSesion']?></button><br><br>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonDetalle']?></button><br><br>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="editarPerfil"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['editarPerfil'] ?></button>
                         </form>        
                     </div>
                     <div class="col">
@@ -75,9 +102,27 @@ if (isset($_REQUEST['detalle'])) {
                          * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Programa' 
                          * 
                          */
-                        echo("<div>Bienvenido ".$_SESSION['DescripcionUsuario']." esta es la ".$_SESSION['NumeroConexiones']." vez que te conectas; "
-                                . "usted se conectó por última vez el ".$_SESSION['FechaHoraUltimaConexionAnterior']."</div>");
+                        if ($_SESSION['NumeroConexiones'] == 1) { // Compruebo si es la primera vez que se conecta y omito la fecha y hora de última conexión
+                            echo("<div>".$aIdiomaSeleccionado[$_COOKIE['idioma']]['bienvenido']." ". $_SESSION['DescripcionUsuario']." ". 
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['estaEsLa']." ". $_SESSION['NumeroConexiones'] ." ".
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['vezQueTeConectas'].";</div>");
+                        } else {
+                            // Si se a conectado más veces muestro toda la información
+                            echo("<div>".$aIdiomaSeleccionado[$_COOKIE['idioma']]['bienvenido']." ". $_SESSION['DescripcionUsuario']." ". 
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['estaEsLa']." ". $_SESSION['NumeroConexiones'] ." ".
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['vezQueTeConectas']."; "." ".
+                                $aIdiomaSeleccionado[$_COOKIE['idioma']]['ultimaConexion'] ." " . $_SESSION['FechaHoraUltimaConexionAnterior'] . "</div>");
+                        }
                         ?> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col mt-5">
+                        <div id="clockdate"><!-- Bloque de código HTML donde va el reloj -->
+                            <div id="clock"></div>
+                            <div id="date"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,7 +134,7 @@ if (isset($_REQUEST['detalle'])) {
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../indexLoginLogoffTema5.html" style="color: white; text-decoration: none; background-color: #666"> Inicio</a>
+                    <a href="../indexLoginLogoffTema5.php" style="color: white; text-decoration: none; background-color: #666"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img
