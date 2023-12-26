@@ -170,14 +170,14 @@ try {
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th class="rounded-top" colspan="3"><legend>Registro</legend></th>
+                                                    <th class="rounded-top" colspan="3"><legend><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['registro'] ?></legend></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <!-- T01_CodUsuario Obligatorio -->
                                                     <td class="d-flex justify-content-start">
-                                                        <label for="T01_CodUsuario">Usuario:</label>
+                                                        <label for="T01_CodUsuario"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['usuario'] ?>:</label>
                                                     </td>
                                                     <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                         comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -195,7 +195,7 @@ try {
                                                 <tr>
                                                     <!-- T01_DescUsuario Obligatorio -->
                                                     <td class="d-flex justify-content-start">
-                                                        <label for="T01_DescUsuario">Descripcion del Usuario:</label>
+                                                        <label for="T01_DescUsuario"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['descUsuario'] ?>:</label>
                                                     </td>
                                                     <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                         comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -213,7 +213,7 @@ try {
                                                 <tr>
                                                     <!-- T01_Password Obligatorio -->
                                                     <td class="d-flex justify-content-start">
-                                                        <label for="T01_Password">Contraseña:</label>
+                                                        <label for="T01_Password"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['contraseña'] ?>:</label>
                                                     </td>
                                                     <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                         comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -231,7 +231,7 @@ try {
                                                 <tr>
                                                     <!-- repetirPassword Obligatorio -->
                                                     <td class="d-flex justify-content-start">
-                                                        <label for="T01_Password">Repetir Contraseña:</label>
+                                                        <label for="T01_Password"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['repetirContraseña'] ?>:</label>
                                                     </td>
                                                     <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                         comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo

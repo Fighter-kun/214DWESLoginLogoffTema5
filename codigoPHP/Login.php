@@ -10,7 +10,7 @@
  */
 // Estructura del boton cancelar, si el ususario pulsa el botón
 if (isset($_REQUEST['cancelar'])) {
-    header('Location: ../indexloginLogoffTema5.php'); // Llevo al usuario a la pagina 'index.loginLogoffTema5.php'
+    header('Location: ../indexLoginLogoffTema5.php'); // Llevo al usuario a la pagina 'index.loginLogoffTema5.php'
     exit();
 }
 

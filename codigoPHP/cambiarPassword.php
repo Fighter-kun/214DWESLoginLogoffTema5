@@ -164,14 +164,14 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th class="rounded-top" colspan="3"><legend>Editar Perfil</legend></th>
+                                                <th class="rounded-top" colspan="3"><legend><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['editarPerfil'] ?></legend></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <!-- contraseñaActual Obligatorio -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="contraseñaActual">Contraseña Actual:</label>
+                                                    <label for="contraseñaActual"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['contraseñaActual'] ?>:</label>
                                                 </td>
                                                 <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                     comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -189,7 +189,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                             <tr>
                                                 <!-- nuevaContraseña Obligatorio -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="nuevaContraseña">Nueva Contraseña:</label>
+                                                    <label for="nuevaContraseña"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['contraseñaNueva'] ?>:</label>
                                                 </td>
                                                 <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                     comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -207,7 +207,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                             <tr>
                                                 <!-- repetirNuevaContraseña Obligatorio -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="repetirNuevaContraseña">Repetir Nueva Contraseña:</label>
+                                                    <label for="repetirNuevaContraseña"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['contraseñaNuevaRepetida'] ?>:</label>
                                                 </td>
                                                 <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                     comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -225,8 +225,8 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                         </tbody>
                                     </table>
                                     <div class="text-center">
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="confirmarCambios">Confirmar Cambios</button>
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar">Cancelar</button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="confirmarCambios"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['confirmarCambios'] ?></button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCancelar'] ?></button>
                                     </div>
                                 </fieldset>
                             </form>

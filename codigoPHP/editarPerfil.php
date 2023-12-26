@@ -144,6 +144,9 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                     color:#4CAF50;
                     font-weight:bold;
                 }
+                .btn-danger {
+                    background-color: red;
+                }
             </style>
         </head>
 
@@ -161,14 +164,14 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th class="rounded-top" colspan="3"><legend>Editar Perfil</legend></th>
+                                                <th class="rounded-top" colspan="3"><legend><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['editarPerfil'] ?></legend></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <!-- Usuario deshabilitado -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="user">Usuario:</label>
+                                                    <label for="user"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['usuario'] ?>:</label>
                                                 </td>
                                                 <td>
                                                     <input class="bloqueado d-flex justify-content-start" type="text" name="user"
@@ -180,7 +183,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                             <tr>
                                                 <!-- Contraseña deshabilitado -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="passwordUsuarioAEditar">Contraseña:</label>
+                                                    <label for="passwordUsuarioAEditar"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['contraseña'] ?>:</label>
                                                 </td>
                                                 <td>
                                                     <input class="bloqueado d-flex justify-content-start" type="password" name="passwordUsuarioAEditar"
@@ -192,7 +195,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                             <tr>
                                                 <!-- descripcionUsuarioAEditar Opcional -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="T01_DescUsuario">Descripcion del Usuario:</label>
+                                                    <label for="T01_DescUsuario"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['descUsuario'] ?>:</label>
                                                 </td>
                                                 <td>                                                                                                <!-- El value contiene una operador ternario en el que por medio de un metodo 'isset()'
                                                                                                                                                     comprobamos que exista la variable y no sea 'null'. En el caso verdadero devovleremos el contenido del campo
@@ -210,7 +213,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                             <tr>
                                                 <!-- nConexionesUsuarioAEditar deshabilitado -->
                                                 <td class="d-flex justify-content-start">
-                                                    <label for="nConexionesUsuarioAEditar">Número de conexiones:</label>
+                                                    <label for="nConexionesUsuarioAEditar"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['numeroDeConexiones'] ?>:</label>
                                                 </td>
                                                 <td>
                                                     <input class="bloqueado d-flex justify-content-start" type="text" name="nConexionesUsuarioAEditar"
@@ -224,7 +227,7 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                                 echo "<tr>
                                                     <!-- fechaHoraUltimaConexionAnteriorUsuarioAEditar deshabilitado -->
                                                     <td class=\"d-flex justify-content-start\">
-                                                        <label for=\"fechaHoraUltimaConexionAnteriorUsuarioAEditar\">Fecha y Hora Última conexión:</label>
+                                                        <label for=\"fechaHoraUltimaConexionAnteriorUsuarioAEditar\">".$aIdiomaSeleccionado[$_COOKIE['idioma']]['fechaYHoraUltimaConexion'].":</label>
                                                     </td>
                                                     <td>
                                                         <input class=\"bloqueado d-flex justify-content-start\" type=\"text\" name=\"fechaHoraUltimaConexionAnteriorUsuarioAEditar\"
@@ -238,10 +241,10 @@ if ($entradaOK) { // Si el usuario ha rellenado el formulario correctamente rell
                                         </tbody>
                                     </table>
                                     <div class="text-center">
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cambiarContraseña">Cambiar Contraseña</button>
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="confirmarCambios">Confirmar Cambios</button>
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar">Cancelar</button>
-                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="eliminarUsuario">Eliminar Usuario</button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cambiarContraseña"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['cambiarContraseña'] ?></button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="confirmarCambios"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['confirmarCambios'] ?></button>
+                                        <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cancelar"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCancelar'] ?></button>
+                                        <button class="btn btn-danger" aria-disabled="true" type="submit" name="eliminarUsuario"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['eliminarUsuario'] ?></button>
                                     </div>
                                 </fieldset>
                             </form>

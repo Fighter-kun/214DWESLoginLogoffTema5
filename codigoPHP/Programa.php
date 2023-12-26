@@ -88,7 +88,7 @@ require_once '../config/configIdiomas.php'; // Incluimos el arrays con los mensa
                         <form name="Programa" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                             <button class="btn btn-secondary" aria-disabled="true" type="submit" name="cerrarSesion"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonCerrarSesion']?></button><br><br>
                             <button class="btn btn-secondary" aria-disabled="true" type="submit" name="detalle"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['botonDetalle']?></button><br><br>
-                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="editarPerfil">Editar Perfil</button>
+                            <button class="btn btn-secondary" aria-disabled="true" type="submit" name="editarPerfil"><?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['editarPerfil'] ?></button>
                         </form>        
                     </div>
                     <div class="col">
