@@ -48,7 +48,15 @@ require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensaj
 
     <body>
         <header class="text-center">
-            <h1><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']?> LoginLogoffTema5</h1>
+            <h1>
+                <?php 
+                /* 
+                Asigno el valor 'SP' por defecto la primera vez que el usuario carga la página utilizando un operador ternario, 
+                manera que utilice el idioma Castellano y luego el que seleccione el usuario
+                */
+                echo (!isset($_COOKIE['idioma']) ? $aIdiomaSeleccionado['SP']['titulo'] : $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']);
+                ?> LoginLogoffTema5
+            </h1>
         </header>
         <main>
             <div class="container mt-3">
@@ -80,7 +88,15 @@ require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensaj
                         IES LOS SAUCES 2023-24 </address>
                 </div>
                 <div class="footer-item">
-                    <a href="../214DWESProyectoDWES/indexProyectoDWES.html" style="color: white; text-decoration: none;"><?php  echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']?></a>
+                    <a href="../214DWESProyectoDWES/indexProyectoDWES.html" style="color: white; text-decoration: none;">
+                        <?php  
+                        /* 
+                        Asigno el valor 'SP' por defecto la primera vez que el usuario carga la página utilizando un operador ternario, 
+                        manera que utilice el idioma Castellano y luego el que seleccione el usuario
+                        */
+                        echo (!isset($_COOKIE['idioma']) ? $aIdiomaSeleccionado['SP']['inicio'] : $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']);
+                        ?>
+                    </a>
                 </div>
                 <div class="footer-item">
                     <a href="https://github.com/Fighter-kun/214DWESLoginLogoffTema5.git" target="_blank"><img
