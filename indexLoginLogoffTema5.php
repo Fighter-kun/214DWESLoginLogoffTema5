@@ -1,8 +1,8 @@
 <?php
 /**
  * @author Carlos García Cachón
- * @version 1.2
- * @since 13/12/2023
+ * @version 1.3
+ * @since 10/01/2024
  * @copyright Todos los derechos reservados a Carlos García
  * 
  * @Annotation Proyecto LoginLogoffTema5 - Parte de 'Index' 
@@ -10,11 +10,13 @@
  */
 if (!isset($_COOKIE['idioma'])) { // Comprobamos si la cookie esta declarada
     setcookie("idioma", "SP", time() + 2592000); // En caso negativo la creamos y ponemos el valor por defecto
+    header('Location: indexLoginLogoffTema5.php'); // Recargamos la página con el nuevo idioma
+    exit();
 }
 
 if (isset($_REQUEST['botonIdioma'])) { // Comprobamos si el usuario a pulsado algún botón de idioma
     setcookie("idioma", $_REQUEST['botonIdioma'], time() + 2592000); // En caso afirmativo creamos la cookie y la cargamos con el valor seleccionado y ponemos una fecha de caducidad de 1 mes
-    header('Location: indexLoginLogoffTema5.php'); // Recrgamos la página con el nuevo idioma
+    header('Location: indexLoginLogoffTema5.php'); // Recargamos la página con el nuevo idioma
     exit();
 }
 require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensajes según el idioma seleccionado
@@ -49,13 +51,7 @@ require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensaj
     <body>
         <header class="text-center">
             <h1>
-                <?php 
-                /* 
-                Asigno el valor 'SP' por defecto la primera vez que el usuario carga la página utilizando un operador ternario, 
-                manera que utilice el idioma Castellano y luego el que seleccione el usuario
-                */
-                echo (!isset($_COOKIE['idioma']) ? $aIdiomaSeleccionado['SP']['titulo'] : $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']);
-                ?> LoginLogoffTema5
+                <?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['titulo']; ?> LoginLogoffTema5
             </h1>
         </header>
         <main>
@@ -89,13 +85,7 @@ require_once './config/configIdiomas.php'; // Incluimos el arrays con los mensaj
                 </div>
                 <div class="footer-item">
                     <a href="../214DWESProyectoDWES/indexProyectoDWES.html" style="color: white; text-decoration: none;">
-                        <?php  
-                        /* 
-                        Asigno el valor 'SP' por defecto la primera vez que el usuario carga la página utilizando un operador ternario, 
-                        manera que utilice el idioma Castellano y luego el que seleccione el usuario
-                        */
-                        echo (!isset($_COOKIE['idioma']) ? $aIdiomaSeleccionado['SP']['inicio'] : $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']);
-                        ?>
+                        <?php echo $aIdiomaSeleccionado[$_COOKIE['idioma']]['inicio']; ?>
                     </a>
                 </div>
                 <div class="footer-item">
